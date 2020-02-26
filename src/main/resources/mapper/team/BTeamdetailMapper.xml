@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.fanqie.homework.team.mapper.BTeamdetailMapper">
+    <!--查询分组明细详情列表-->
+    <select id="selectteamdetaillist" resultType="cn.fanqie.homework.team.entity.BTeamdetail">
+    SELECT
+    b_teamdetail.user_crew_id
+    FROM
+    b_teamdetail
+    WHERE
+    b_teamdetail.team_id =  #{teamId}
+    </select>
+
+    <delete id="removeteam" parameterType="cn.fanqie.homework.team.entity.BTeamdetail">
+        DELETE FROM b_teamdetail WHERE b_teamdetail.team_id =  #{teamId}
+    </delete>
+
+    <delete id="removeById" parameterType="cn.fanqie.homework.team.entity.BTeamdetail">
+        DELETE FROM b_teamdetail WHERE b_teamdetail.teamdetail_id =  #{teamId}
+    </delete>
+
+
+    <select id="selectTeamdetailOne" resultType="cn.fanqie.homework.team.entity.BTeamdetail">
+    SELECT *  FROM b_teamdetail
+    WHERE b_teamdetail.team_id =#{teamId} AND b_teamdetail.user_crew_id = #{userId}
+    </select>
+</mapper>

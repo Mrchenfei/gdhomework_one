@@ -1,0 +1,54 @@
+server:
+  port: 8070
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/gdos-wx?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=CONVERT_TO_NULL&autoReconnect=true&serverTimezone=UTC
+    #url: jdbc:mysql://120.238.247.57:3306/gdos_wx?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=CONVERT_TO_NULL&autoReconnect=true&serverTimezone=UTC
+    #url: jdbc:mysql://localhost:3306/gdos-wx?characterEncoding=UTF-8&useUnicode=true&useSSL=false&autoReconnect=true
+    username: root
+    password: chenfei
+    #password: xc@2019XC
+    hikari:
+      readOnly: false
+      connection-timeout: 60000
+      minimum-idle: 10
+      maximum-pool-size: 60
+      idle-timeout: 60000
+      max-lifetime: 60000
+      auto-commit: true
+      validation-timeout: 3000
+      login-timeout: 5
+  freemarker:
+    template-loader-path: classpath:/templates
+    cache: false
+    charset: utf-8
+    check-template-location: true
+    content-type: text/html
+    expose-request-attributes: true
+    expose-session-attributes: true
+    request-context-attribute: request
+    suffix: .ftl
+
+#mybatis-plus:
+#  mapper-locations: classpath*:cn/fanqie/homework/**/mapper/xml/*Mapper.xml
+#  mapper-locations: classpath*:org/jeecg/modules/**/xml/*Mapper.xml
+#  # mapper-locations: classpath:/mapper/user/*Mapper.xml
+#  global-config:
+#    db-config:
+#      id-type: UUID
+#      table-underline: true
+#      logic-delete-value: 0
+#      logic-not-delete-value: -1
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#
+
+    mybatis-plus:
+      global-config:
+        db-config:
+          db-type: mysql
+          id-type: UUID
+      configuration:
+        log-impl:  org.apache.ibatis.logging.slf4j.Slf4jImpl
+        mapper-locations: classpath:mapper/*.xml

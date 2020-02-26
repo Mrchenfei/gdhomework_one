@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.fanqie.homework.submit.mapper.BSubmitMapper">
+    <select id="selectsubmitlist" resultType="cn.fanqie.homework.submit.Vo.submitVo">
+    SELECT *
+    FROM
+    b_submit
+    INNER JOIN b_job ON b_job.job_id = b_submit.job_id
+    INNER JOIN b_user ON b_user.user_id = b_job.user_id
+    WHERE b_submit.user_id = #{userId}
+    </select>
+
+    <select id="selectUsersubmitlist" resultType="cn.fanqie.homework.submit.Vo.submitVo">
+    SELECT *
+    FROM
+    b_submit
+    INNER JOIN b_user ON b_user.user_id = b_submit.user_id
+    WHERE b_submit.job_id = #{jobId} AND b_submit.submit_if = 1
+    </select>
+
+    <select id="selectjobsubmitlist" resultType="cn.fanqie.homework.submit.Vo.submitVo">
+       SELECT
+        b_user.user_headportrait,
+        b_user.user_name,
+        b_user.user_nickname,
+        b_job.job_title,
+        b_job.job_publish_date,
+        b_submit.submit_look_if,
+        b_submit.submit_id,
+        b_job.job_id
+        FROM
+        b_job
+        INNER JOIN b_user ON b_user.user_id = b_job.user_id
+        INNER JOIN b_submit ON b_submit.job_id = b_job.job_id
+        WHERE b_submit.user_id = #{userId} and b_submit.submit_look_if = 0
+    order by b_job.job_publish_date desc limit 3
+    </select>
+
+    <select id="selectsubmitcaselist" resultType="cn.fanqie.homework.submit.Vo.submitVo">
+    SELECT
+    b_submit.job_id,
+    b_submit.user_id,
+    b_submit.submit_if,
+    b_user.user_nickname,
+    b_user.user_name,
+    b_user.user_headportrait
+    FROM
+    b_submit
+    INNER JOIN b_user ON b_user.user_id = b_submit.user_id
+    where b_submit.job_id = #{jobId} AND b_submit.submit_if = #{submiIf}
+    </select>
+
+    <select id="selectUsersubmitNolist" resultType="cn.fanqie.homework.submit.Vo.submitVo">
+    SELECT *
+    FROM
+    b_submit
+    INNER JOIN b_user ON b_user.user_id = b_submit.user_id
+    WHERE b_submit.job_id = #{jobId}
+    </select>
+
+    <select id="selectUsersubmitcorrectlist" resultType="cn.fanqie.homework.submit.Vo.submitVo">
+    SELECT
+    b_submit.submit_id,
+    b_submit.job_id,
+    b_submit.user_id,
+    b_submit.submit_date,
+    b_submit.submit_score,
+    b_submit.submit_scale,
+    b_submit.submit_mark_date,
+    b_submit.submit_modify,
+    b_submit.submit_if,
+    b_submit.submit_remark,
+    b_submit.submitl_character,
+    b_submit.submit_voice,
+    b_submit.team_id,
+    b_user.user_name,
+    b_user.user_nickname,
+    b_user.user_headportrait
+    FROM
+    b_submit
+    INNER JOIN b_user ON b_user.user_id = b_submit.user_id
+    where b_submit.job_id =#{jobId} AND b_submit.submit_modify = 1
+    </select>
+
+    <select id="selectUsersubmitOnelist" resultType="cn.fanqie.homework.submit.Vo.submitVo">
+            SELECT *,
+            b_submit.submit_remark AS jobRemark
+            FROM
+            b_submit
+            INNER JOIN b_job ON b_job.job_id = b_submit.job_id
+            INNER JOIN b_user ON b_user.user_id = b_submit.user_id
+    WHERE b_submit.submit_id = #{submitId}
+    </select>
+</mapper>

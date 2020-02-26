@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.fanqie.homework.team.mapper.BTeamMapper">
+    <!--查询配货单列表-->
+    <select id="selectteamlist" resultType="cn.fanqie.homework.team.entity.BTeam">
+    SELECT *
+    FROM b_team
+    where b_team.user_build_id  = #{userId} and b_team.team_type =1
+    </select>
+
+
+    <select id="selectAll" resultMap="int" resultType="java.lang.Integer">
+        SELECT 1 from b_team
+    </select>
+</mapper>
+
+

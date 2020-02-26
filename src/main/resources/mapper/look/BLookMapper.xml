@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.fanqie.homework.look.mapper.BLookMapper">
+    <select id="selecttrueLooklist" resultType="cn.fanqie.homework.look.entity.BLook">
+    SELECT * FROM b_look
+    WHERE b_look.job_id=#{jobId} AND b_look.look_if = 1
+    </select>
+
+
+    <select id="selecttrLooklist" resultType="cn.fanqie.homework.submit.Vo.submitVo">
+    SELECT
+b_user.user_id,
+b_user.user_name,
+b_user.user_headportrait,
+b_user.user_nickname,
+b_submit.job_id,
+b_submit.submit_look_if
+FROM
+b_user
+INNER JOIN b_submit ON b_user.user_id = b_submit.user_id
+  WHERE b_submit.job_id =	#{jobId}
+    </select>
+</mapper>

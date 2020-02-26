@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.fanqie.homework.user.mapper.BUserMapper">
+
+    <select id="selectUserBywechatId" resultType="cn.fanqie.homework.user.entity.BUser">
+        SELECT *
+        FROM b_user
+        WHERE wechat_id = #{openid}
+    </select>
+
+</mapper>

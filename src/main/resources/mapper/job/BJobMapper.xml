@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.fanqie.homework.job.mapper.BJobMapper">
+    <select id="selectJoblist" resultType="cn.fanqie.homework.job.Vo.jobVo">
+    SELECT *
+    FROM
+    b_job
+    INNER JOIN b_user ON b_user.user_id = b_job.user_id
+    WHERE b_job.user_id = #{userId} AND b_job.delete_flag = 0
+    </select>
+
+    <select id="selectJobOne" resultType="cn.fanqie.homework.job.Vo.jobVo">
+    SELECT *
+    FROM
+    b_job
+    INNER JOIN b_user ON b_user.user_id = b_job.user_id
+    WHERE b_job.job_id = #{userId} AND b_job.delete_flag = 0
+    </select>
+
+    <select id="selectAllJobList" resultType="cn.fanqie.homework.job.Vo.jobVo">
+    SELECT DISTINCT
+    b_job.job_id,
+    b_job.job_title,
+    b_user.user_name,
+    b_user.user_nickname,
+    b_user.user_headportrait,
+    b_team.team_name,
+    b_job.job_publish_date
+    FROM
+    b_job
+    INNER JOIN b_user ON b_user.user_id = b_job.user_id
+    INNER JOIN b_job_team ON b_job_team.job_id = b_job.job_id
+    INNER JOIN b_team ON b_team.team_id = b_job_team.team_id
+    order by b_job.job_publish_date desc limit 10
+    </select>
+
+    <select id="selectAllAJobList" resultType="cn.fanqie.homework.job.Vo.jobVo">
+    SELECT DISTINCT
+    b_job.job_id,
+    b_job.job_title,
+    b_user.user_name,
+    b_user.user_nickname,
+    b_user.user_headportrait,
+    b_team.team_name,
+    b_job.job_publish_date
+    FROM
+    b_job
+    INNER JOIN b_user ON b_user.user_id = b_job.user_id
+    INNER JOIN b_job_team ON b_job_team.job_id = b_job.job_id
+    INNER JOIN b_team ON b_team.team_id = b_job_team.team_id
+    order by b_job.job_publish_date desc
+    </select>
+</mapper>
